@@ -602,7 +602,15 @@ Qed.
 
 Theorem mult_1_l : forall n:nat, 1 * n = n.
 Proof.
-
+  intro n.
+  induction n.
+  simpl.
+  reflexivity.
+  simpl.
+  rewrite -> plus_n_O.
+  simpl.
+  reflexivity.
+Qed.
 
 Theorem all3_spec : forall b c : bool,
     orb
@@ -611,18 +619,59 @@ Theorem all3_spec : forall b c : bool,
                (negb c))
   = true.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros b c.
+  destruct b.
+  simpl.
+  destruct c.
+  simpl.
+  reflexivity.
+  simpl.
+  reflexivity.
+  simpl.
+  reflexivity.
+Qed.
+
+
 
 Theorem mult_plus_distr_r : forall n m p : nat,
   (n + m) * p = (n * p) + (m * p).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n m p.
+  induction n.
+  simpl.
+  reflexivity.
+  simpl.
+  rewrite -> IHn.
+  simpl.
+  rewrite -> plus_assoc.
+  reflexivity.
+Qed.
+
+Theorem mult_assoc_distr_r: forall n m p :nat,
+    (n + m) * p = (n * p) + (m * p).
+Proof.
+  intros n m p.
+  induction n.
+  simpl.
+  reflexivity.
+  simpl.
+  rewrite -> IHn.
+  rewrite -> plus_assoc.
+  reflexivity.
+Qed.
 
 Theorem mult_assoc : forall n m p : nat,
   n * (m * p) = (n * m) * p.
 Proof.
-  (* FILL IN HERE *) Admitted.
-(** [] *)
+  intros n m p.
+  induction n.
+  simpl.
+  reflexivity.
+  simpl.
+  rewrite -> IHn.
+  rewrite -> mult_assoc_distr_r.
+  reflexivity.
+Qed.
 
 (** **** Exercise: 2 stars, optional (beq_nat_refl)  *)
 (** Prove the following theorem.  (Putting the [true] on the left-hand
@@ -634,8 +683,13 @@ Proof.
 Theorem beq_nat_refl : forall n : nat,
   true = beq_nat n n.
 Proof.
-  (* FILL IN HERE *) Admitted.
-(** [] *)
+  intro n.
+  induction n.
+  simpl.
+  reflexivity.
+  simpl.
+  apply IHn.
+Qed.
 
 (** **** Exercise: 2 stars, optional (plus_swap')  *)
 (** The [replace] tactic allows you to specify a particular subterm to
@@ -650,8 +704,15 @@ Proof.
 Theorem plus_swap' : forall n m p : nat,
   n + (m + p) = m + (n + p).
 Proof.
-  (* FILL IN HERE *) Admitted.
-(** [] *)
+  intros n m p.
+  induction n.
+  simpl.
+  reflexivity.
+  simpl.
+  rewrite -> IHn.
+  rewrite -> plus_n_Sm.
+  reflexivity.
+Qed.
 
 (** **** Exercise: 3 stars, recommendedM (binary_commute)  *)
 (** Recall the [incr] and [bin_to_nat] functions that you
