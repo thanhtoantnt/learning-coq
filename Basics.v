@@ -1240,7 +1240,14 @@ Theorem identity_fn_applied_twice :
   (forall (x : bool), f x = x) ->
   forall (b : bool), f (f b) = b.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros f.
+  intro h.
+  intro x.
+  rewrite -> h.
+  rewrite -> h.
+  reflexivity.
+Qed.
+
 
 (** Now state and prove a theorem [negation_fn_applied_twice] similar
     to the previous one but where the second hypothesis says that the
@@ -1259,8 +1266,10 @@ Theorem andb_eq_orb :
   (andb b c = orb b c) ->
   b = c.
 Proof.
-  (* FILL IN HERE *) Admitted.
-(** [] *)
+  intros b c.
+  intro H.
+Admitted.
+
 
 (** **** Exercise: 3 starsM (binary)  *)
 (** Consider a different, more efficient representation of natural
